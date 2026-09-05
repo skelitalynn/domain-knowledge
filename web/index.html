@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+  <title>知识飞轮控制台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content">跳到主要内容</a>
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar" aria-label="主导航" aria-hidden="false">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">⌁</span>
+        <div><strong>domain<span>/</span>knowledge</strong></div>
+      </div>
+      <div class="project-card" aria-label="当前项目">
+        <span class="project-avatar" aria-hidden="true">WP</span>
+        <span><small>项目</small><strong>wpKnowledge</strong></span>
+        <i aria-hidden="true">⌄</i>
+      </div>
+      <nav id="primary-nav">
+        <p class="nav-section">工作区</p>
+        <button class="nav-item active" data-page="overview"><span aria-hidden="true">⌂</span>操作中心 <em id="governance-count"></em></button>
+        <button class="nav-item" data-page="runs"><span aria-hidden="true">◎</span>飞轮批次</button>
+        <button class="nav-item" data-page="knowledge"><span aria-hidden="true">▤</span>知识</button>
+        <button class="nav-item" data-page="graph"><span aria-hidden="true">⌘</span>工作流图</button>
+        <p class="nav-section">质量</p>
+        <button class="nav-item" data-page="evaluations"><span aria-hidden="true">◫</span>评测</button>
+        <button class="nav-item" data-page="sources"><span aria-hidden="true">⌕</span>来源</button>
+        <button class="nav-item" data-page="agent-settings"><span aria-hidden="true">✦</span>Agent 设置</button>
+      </nav>
+      <div class="sidebar-foot">
+        <span id="registry-indicator" class="health-dot pending" aria-hidden="true"></span>
+        <div><strong id="registry-label">连接中</strong><small>知识注册</small></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button id="nav-toggle" class="icon-button nav-toggle" type="button" aria-label="打开主导航" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <div class="topbar-title">
+          <h1 id="page-title">操作中心</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="global-search-button" class="secondary-button search-button" type="button" aria-label="搜索知识">⌕ 搜索知识　⌘ K</button>
+          <button id="theme-button" class="secondary-button theme-button" type="button" aria-label="切换到浅色主题">☼</button>
+          <span id="mode-pill" class="status-pill">只读模式</span>
+          <button id="operator-button" class="primary-button" type="button">＋ 新建批次</button>
+        </div>
+      </header>
+      <section id="page-content" class="page-content" tabindex="-1" aria-live="polite">
+        <div class="loading-state"><span class="spinner" aria-hidden="true"></span>正在连接知识飞轮…</div>
+      </section>
+      <footer id="runtime-footer" class="runtime-footer"></footer>
+    </main>
+  </div>
+
+  <button id="nav-backdrop" class="nav-backdrop" type="button" aria-label="关闭主导航" hidden></button>
+
+  <aside id="detail-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true" hidden>
+    <div class="drawer-header">
+      <div><p class="eyebrow">详细信息</p><h2 id="drawer-title">详情</h2></div>
+      <button id="drawer-close" class="icon-button" type="button" aria-label="关闭详情">×</button>
+    </div>
+    <div id="drawer-content" class="drawer-content"></div>
+  </aside>
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+
+  <dialog id="operator-dialog">
+    <form id="operator-form">
+      <p class="eyebrow">受信操作员</p>
+      <h2>进入治理模式</h2>
+      <p class="subtitle">令牌只保存在当前页面的内存中，不会写入网址或本地存储。</p>
+      <label>治理令牌<input id="operator-token" type="password" autocomplete="off" placeholder="输入 .env.local 中配置的令牌" required></label>
+      <div class="dialog-actions">
+        <button id="operator-cancel" type="button" class="secondary-button">取消</button>
+        <button value="default" class="primary-button">确认</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
